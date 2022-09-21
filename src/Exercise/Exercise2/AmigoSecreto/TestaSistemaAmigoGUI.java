@@ -13,7 +13,12 @@ public class TestaSistemaAmigoGUI {
 
 
         while(!sair){
-            sistema.cadastraAmigo(JOptionPane.showInputDialog("qual o nome do  amigo?: "),JOptionPane.showInputDialog("qual o email dele?: "));
+            try{
+                sistema.cadastraAmigo(JOptionPane.showInputDialog("qual o nome do  amigo?: "),JOptionPane.showInputDialog("qual o email dele?: "));
+                JOptionPane.showMessageDialog(null,"amigo cadastrado com sucesso");
+            }catch(AmigoJaExisteException e){
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
             int sairInt = JOptionPane.showConfirmDialog(null,"deseja continuar?","Atenção",JOptionPane.YES_NO_OPTION);
             if (sairInt == 1){
                 sair = true;

@@ -8,8 +8,18 @@ public class TestaSistemaAmigo {
 
         SistemaAmigo sistema = new SistemaAmigo();
 
-        sistema.cadastraAmigo("José","josé@email.com");
-        sistema.cadastraAmigo("Maria","Maria@email.com");
+        try{
+            sistema.cadastraAmigo("José","josé@email.com");
+            JOptionPane.showMessageDialog(null,"amigo cadastrado com sucesso");
+        }catch (AmigoJaExisteException e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+        try{
+            sistema.cadastraAmigo("Maria","Maria@email.com");
+            JOptionPane.showMessageDialog(null,"amigo cadastrado com sucesso");
+        }catch (AmigoJaExisteException e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
 
         try{
             sistema.configuraAmigoSecretoDe("josé@email.com","Maria@email.com");

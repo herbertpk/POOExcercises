@@ -1,4 +1,6 @@
 package Exercise.Exercise2.AmigoSecreto;
+
+
 import java.util.ArrayList;
 
 public class SistemaAmigo {
@@ -14,20 +16,24 @@ public class SistemaAmigo {
         this.amigos = new ArrayList<Amigo>();
         this.mensagens = new ArrayList<Mensagem>();
     }
-    public void cadastraAmigo(String nomeAmigo, String emailAmigo){
+    public void cadastraAmigo(String nomeAmigo, String emailAmigo)throws AmigoJaExisteException {
         Amigo novoAmigo = new Amigo(nomeAmigo,emailAmigo,null);
+        for (Amigo amigo:amigos){
+            if(amigo.equals(novoAmigo)){
+                throw new AmigoJaExisteException("já existe este amigo de nome: "+nomeAmigo+" e de email: "+emailAmigo);
+            }
+        }
         amigos.add(novoAmigo);
     }
 
-    public Amigo pesquisaAmigo(String emailAmigo){
-        Amigo return1 = new Amigo();
+    public Amigo pesquisaAmigo(String emailAmigo) throws AmigoInexistenteException{
 
         for (Amigo amigo:amigos) {
             if(emailAmigo == amigo.getEmail()){
                 return amigo;
             }
         }
-        return return1;
+        throw new AmigoInexistenteException("não existe ninguem com este email: "+ emailAmigo);
     }
 
     public void enviarMensagemParaTodos(String texto, String emailRemetente, boolean ehAnonima){
