@@ -1,6 +1,5 @@
 package Exercise.Exercise2.AmigoSecreto;
 
-import java.net.Inet4Address;
 import java.util.HashMap;
 import java.util.ArrayList;
 
@@ -12,8 +11,8 @@ public class SistemaAmigoMap {
 
 
     public SistemaAmigoMap() {
-        this.amigos = new HashMap<Integer,Amigo>();
-        this.mensagens = new HashMap<Integer,Mensagem>();
+        this.amigos = new HashMap<>();
+        this.mensagens = new HashMap<>();
     }
 
     public void cadastraAmigo(String nomeAmigo, String emailAmigo)throws AmigoJaExisteException{
@@ -25,7 +24,6 @@ public class SistemaAmigoMap {
         }
         if(amigos.isEmpty()){
             amigos.put(1,novoAmigo);
-            return;
         }else{
             amigos.put(amigos.size()+1,novoAmigo);
         }
@@ -46,7 +44,6 @@ public class SistemaAmigoMap {
         MensagemParaTodos mensagemTodos = new MensagemParaTodos(texto,emailRemetente,ehAnonima);
         if(mensagens.isEmpty()){
             mensagens.put(1,mensagemTodos);
-            return;
         }else{
             mensagens.put(mensagens.size()+1,mensagemTodos);
         }
@@ -57,7 +54,6 @@ public class SistemaAmigoMap {
         MensagemParaAlguem mensagemAlguem = new MensagemParaAlguem(texto,emailRemetente,emailDestinatario,ehAnonima);
         if(mensagens.isEmpty()){
             mensagens.put(1,mensagemAlguem);
-            return;
         }else{
             mensagens.put(mensagens.size()+1,mensagemAlguem);
         }
@@ -84,7 +80,7 @@ public class SistemaAmigoMap {
     public void configuraAmigoSecretoDe(String emailDaPessoa, String emailAmigoSorteado) throws AmigoInexistenteException{
 
         for (int i = 1; i < amigos.size(); i++){
-            if(emailDaPessoa == amigos.get(i).getEmail()) {
+            if(emailDaPessoa.equals(amigos.get(i).getEmail())) {
                 amigos.get(i).setEmailAmigoSorteado(emailAmigoSorteado);
                 return;
             }
@@ -94,7 +90,7 @@ public class SistemaAmigoMap {
 
     public String pesquisaAmigoSecretoDe(String emailDaPessoa) throws AmigoInexistenteException,AmigoNaoSorteadoException{
         for (int i = 1; i < amigos.size(); i++) {
-            if (emailDaPessoa == amigos.get(i).getEmail()) {
+            if (emailDaPessoa.equals(amigos.get(i).getEmail())) {
                 if(amigos.get(i).getEmailAmigoSorteado() == null){
                     throw new AmigoNaoSorteadoException("Esse amigo secreto ainda não foi sorteado");
                 }
